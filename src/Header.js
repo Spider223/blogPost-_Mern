@@ -13,7 +13,7 @@ export default function Header() {
   useEffect(() => {
     const configuration = {
       method: "get",
-      url: "http://localhost:5000/profile",
+      url: "http://localhost:4000/profile",
       headers: {
         Authorization: `Bearer ${token}`,
       },

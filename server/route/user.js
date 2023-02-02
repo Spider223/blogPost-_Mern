@@ -112,6 +112,38 @@ router.post(
   }
 );
 
+router.put("/post",uploadMiddleware.single("file"),auth, async(req,res) => {
+  let newPath = null;
+  if (req.file) {
+    const {originalname,path} = req.file;
+    const parts = originalname.split('.');
+    const ext = parts[parts.length - 1];
+    newPath = path+'.'+ext;
+    fs.renameSync(path, newPath);
+  }
+
+  const {id,title,summary,content} = req.body;
+  const postDoc = await Post.findById(id);
+
+  const isAuthor = JSON.stringify(postDoc?.author?._id) === JSON.stringify(req?.user?.ID);
+    if (!isAuthor) {
+      return res.status(400).json('you are not the author');
+    }
+
+   
+
+    await postDoc.update({
+      title,
+      summary,
+      content,
+      cover: newPath ? newPath : postDoc.cover,
+    });
+
+    res.json(postDoc);
+  
+
+})
+
 router.get("/post", async (req, res) => {
   const posts = await Post.find()
     .populate("author", ["username"])

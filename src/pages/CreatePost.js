@@ -53,7 +53,7 @@ export default function CreatePost() {
 
     const configuration = {
       method: "post",
-      url: "http://localhost:5000/post",
+      url: "http://localhost:4000/post",
       headers: {
         Authorization: `Bearer ${token}`,
       },

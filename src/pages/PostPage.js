@@ -8,7 +8,7 @@ export default function PostPage() {
 
   const { id } = useParams();
   useEffect(() => {
-    axios.get(`http://localhost:5000/post/${id}`).then((result) => {
+    axios.get(`http://localhost:4000/post/${id}`).then((result) => {
       console.log(result.data);
       setSinglePost(result.data);
     });
@@ -40,7 +40,7 @@ export default function PostPage() {
       </div>
 
       <div className="image">
-        <img src={`http://localhost:5000/${singlePost?.cover}`} alt="" />
+        <img src={`http://localhost:4000/${singlePost?.cover}`} alt="" />
       </div>
       <div
         className="content"

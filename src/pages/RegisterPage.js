@@ -10,7 +10,7 @@ export default function RegisterPage() {
 
     const configuration = {
       method: "POST",
-      url: "http://localhost:5000/register",
+      url: "http://localhost:4000/register",
       data: {
         username,
         password,
